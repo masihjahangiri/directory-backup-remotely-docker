@@ -2,8 +2,8 @@ FROM alpine:3.16
 RUN apk update && apk upgrade
 RUN apk add --no-cache \
   openssh \
-  rsync
-  # postgresql-client
+  rsync \
+  tar
 
 # copy crontabs for root user
 COPY config/cronjobs /etc/crontabs/root
