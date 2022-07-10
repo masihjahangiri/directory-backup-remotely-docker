@@ -3,7 +3,7 @@ version: '3.3'
 
 services:
   cronjob:
-    container_name: cronjob-alpine
+    container_name: ${CRONJOB_CONTAINER_NAME}
     build:
       context: .
       dockerfile: Dockerfile
@@ -18,6 +18,7 @@ services:
       SSH_PORT: ${SSH_PORT}
       REMOTE_SOURCE_PATH: ${REMOTE_SOURCE_PATH}
   fileBrowser:
+    container_name: ${FILE_BROWSER_CONTAINER_NAME}
     image: filebrowser/filebrowser
     ports:
       - ${FILE_BROWSER_PORT}:80
