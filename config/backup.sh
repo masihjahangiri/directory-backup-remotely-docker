@@ -6,7 +6,7 @@ OUTPUT_FILE=${BACKUP_DIR}/${FILE}
 mkdir -p ${BACKUP_DIR}
 mkdir -p /temp/last-backup
 
-rsync -chavzP -e "ssh -p $SSH_PORT -i id_rsa" "$SSH_USERNAME@$SSH_HOST:$REMOTE_SOURCE_PATH" /temp/last-backup
+rsync -chavzP -e "ssh -oStrictHostKeyChecking=no -o ExitOnForwardFailure=yes -p $SSH_PORT -i id_rsa" "$SSH_USERNAME@$SSH_HOST:$REMOTE_SOURCE_PATH" /temp/last-backup
 
 # ssh -oStrictHostKeyChecking=no -o ExitOnForwardFailure=yes -f -L 1111:localhost:${DB_PORT} ${SSH_USERNAME}@${SSH_HOST} -p ${SSH_PORT} sleep 10
 # PGPASSWORD=${DB_PASSWORD} pg_dump -c -h localhost --port 1111 -U ${DB_USER} ${DB_NAME} -F p -f ${OUTPUT_FILE}
