@@ -7,6 +7,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    restart: always
     volumes:
       - backups:${BACKUP_DIR}
     environment:
@@ -19,6 +20,7 @@ services:
       REMOTE_SOURCE_PATH: ${REMOTE_SOURCE_PATH}
   fileBrowser:
     container_name: ${FILE_BROWSER_CONTAINER_NAME}
+    restart: always
     image: filebrowser/filebrowser
     ports:
       - ${FILE_BROWSER_PORT}:80
