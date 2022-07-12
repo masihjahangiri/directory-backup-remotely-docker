@@ -4,11 +4,11 @@ FILE=`date +"%Y-%m-%d-%H_%M"`${FILE_SUFFIX}
 OUTPUT_FILE=${BACKUP_DIR}/${FILE}
 
 mkdir -p ${BACKUP_DIR}
-mkdir -p /temp/last-backup
+mkdir -p ${BACKUP_DIR}/last-backup
 
-rsync -ravp --progress --stats -e "ssh -oStrictHostKeyChecking=no -o ExitOnForwardFailure=yes -p $SSH_PORT -i id_rsa" "$SSH_USERNAME@$SSH_HOST:$REMOTE_SOURCE_PATH/" /temp/last-backup --delete
+rsync -ravp --progress --stats -e "ssh -oStrictHostKeyChecking=no -o ExitOnForwardFailure=yes -p $SSH_PORT -i id_rsa" "$SSH_USERNAME@$SSH_HOST:$REMOTE_SOURCE_PATH/" ${BACKUP_DIR}/last-backup --delete
 
-tar -cvpzf "${OUTPUT_FILE}.tar.gz" -C /temp/last-backup .
+tar -cvpzf "${OUTPUT_FILE}.tar.gz" -C ${BACKUP_DIR}/last-backup .
 
 echo "${OUTPUT_FILE}.tar.gz was created:"
 ls -l ${OUTPUT_FILE}.tar.gz
