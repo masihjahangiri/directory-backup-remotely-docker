@@ -1,20 +1,21 @@
 FROM ubuntu:22.04
 
-RUN apt-get update && apt-get upgrade -y
-RUN apt-get install --no-install-recommends -y \
-  rsync \
-  tar
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends \
+    rsync \
+    tar && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # copy crontabs for root user
 COPY config/cronjobs /etc/crontabs/root
 
 COPY config/id_rsa /root/.ssh/
-RUN chmod 600 ~/.ssh/id_rsa
+RUN chmod 600 /root/.ssh/id_rsa
 
 COPY config/backup.sh /root/
 RUN chmod u+r+x /root/backup.sh
 
-
-
-# start crond with log level 8 in foreground, output to stderr
-CMD ["crond", "-f", "-d", "8"]
+# start cron with log level 8 in foreground
+CMD ["cron", "-f", "-L", "8"]
