@@ -1,16 +1,11 @@
 version: '3.3'
 
-networks:
-  host:
-    external: true
-
 services:
   cronjob:
     container_name: ${CRONJOB_CONTAINER_NAME}
     build:
       context: .
       dockerfile: Dockerfile
-      network: host
     restart: always
     volumes:
       - backups:${BACKUP_DIR}
