@@ -7,6 +7,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      network: host
     restart: always
     volumes:
       - backups:${BACKUP_DIR}
