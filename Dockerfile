@@ -1,5 +1,5 @@
 FROM ubuntu:20.04
-RUN apt update && apt upgrade
+RUN apt update
 RUN apt install --no-install-recommends \
   rsync \
   tar
