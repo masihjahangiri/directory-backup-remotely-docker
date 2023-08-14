@@ -1,6 +1,7 @@
-FROM ubuntu:20.04
-RUN apt update
-RUN apt install --no-install-recommends \
+FROM alpine:3.16
+RUN apk update && apk upgrade
+RUN apk add --no-cache \
+  openssh \
   rsync \
   tar
 
